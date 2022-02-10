@@ -3,7 +3,7 @@
 In `MyPoint`, we have a C source file that includes `MyPoint.h`
 
 *MyPoint.h*
-```header
+```h
 struct MyPoint {
     int x;
     int y;

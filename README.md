@@ -39,3 +39,9 @@ print("Hello, world!")
 let version = String(cString: sqlite3_libversion())
 print("SQLite3 Version: \(version)")
 ```
+
+```bash
+SQLiteTest$ swift run
+Hello, world!
+SQLite3 Version: 3.36.0
+```

@@ -1,0 +1,5 @@
+module Rust {
+    header "rust.h"
+    header "SwiftBridgeCore.h"
+    export *
+}

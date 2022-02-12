@@ -106,7 +106,9 @@ Inside of the new folder, run:
 ```bash
 xcodebuild -create-xcframework \
     -library simulator/librust.a \
+    -headers include \
     -library ios/librust.a \
+    -headers include \
     -library macos/librust.a \
     -headers include \
     -output rust.xcframework
@@ -117,7 +119,7 @@ The order of the library tags is important.
 ## Swift Package
 Let's now make another folder for our package and run `swift package init --type library` inside of it.
 
-Let's copy the generated swift files to the `Sources/{package_name}` directory and add `import Rust` to them and make their functions public.
+Let's copy the generated swift files to the `Sources/{package_name}` directory and add `import Rust` to them and make their functions **public**.
 
 Copy the xcframework to our new folder.
 
@@ -209,3 +211,5 @@ print_hello_rust()
 $ swift run
 Hello from Rust!
 ```
+
+**NOTES**: We will have to make the methods in SwiftBridgeCore public or wrap the functions in Swift to Swift types

@@ -26,7 +26,7 @@ class SwiftString {
 }
 
 extension RustString {
-    func toString() -> String {
+    public func toString() -> String {
         let str = self.as_str()
         let string = str.toString()
 

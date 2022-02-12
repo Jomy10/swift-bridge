@@ -1,3 +1,5 @@
+*multiple targets*
+
 ## Set up rust project
 ```yaml
 # Cargo.toml
@@ -56,7 +58,13 @@ export SWIFT_BRIDGE_OUT_DIR="$(pwd)/generated"
 cargo build --target x86_64-apple-darwin
 ```
 
-build the header and swift files
+Let's also add ios targets:
+```bash
+cargo build --target aarch64-apple-ios 
+cargo build --target x86_64-apple-ios
+```
+
+build the header and swift files and the rust library
 ```bash
 ./build.sh
 ```
@@ -65,7 +73,7 @@ build the header and swift files
 
 Make a new directory (`framework`).
 
-Copy the the `.a` file and the headers to this directory.
+Copy the the `.a` files and the headers to this directory.
 
 The folder structure should look like this:
 
@@ -73,8 +81,14 @@ The folder structure should look like this:
 framework
 ├── include
 │   ├── SwiftBridgeCore.h
+│   ├── module.modulemap
 │   └── rust.h
-└── librust.a
+├── ios
+│   └── librust.a
+├── macos
+│   └── librust.a
+└── simulator
+    └── librust.a
 ```
 
 ### Add a module map in the include directory
@@ -90,10 +104,15 @@ module Rust {
 
 Inside of the new folder, run:
 ```bash
-xcodebuild -create-xcframework -output rust.xcframework  \
-    -library librust.a \
-    -headers include
+xcodebuild -create-xcframework \
+    -library simulator/librust.a \
+    -library ios/librust.a \
+    -library macos/librust.a \
+    -headers include \
+    -output rust.xcframework
 ```
+
+The order of the library tags is important.
 
 ## Swift Package
 Let's now make another folder for our package and run `swift package init --type library` inside of it.

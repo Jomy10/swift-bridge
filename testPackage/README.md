@@ -1,3 +1,3 @@
 # testPackage
 
-A description of this package.
+An executable Swift project for testing `package`, which wraps the XCframework `framework`.

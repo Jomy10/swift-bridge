@@ -9,4 +9,3 @@ public func is_from_rust() -> Bool {
 public func get_hello_rust() -> RustString {
     RustString(ptr: __swift_bridge__$get_hello_rust())
 }
-
